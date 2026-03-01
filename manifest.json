@@ -1,0 +1,9 @@
+{
+  "name": "ESC Manager",
+  "short_name": "ESC",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d1b2a",
+  "theme_color": "#c1121f",
+  "icons": []
+}
