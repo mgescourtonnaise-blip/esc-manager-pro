@@ -1,10 +1,10 @@
-let db = {};
 let admin = false;
+let DATA = {};
 
 fetch("data.json")
-  .then(r => r.json())
+  .then(response => response.json())
   .then(data => {
-    db = data;
+    DATA = data;
     showTab("effectif");
   });
 
@@ -12,50 +12,39 @@ function showTab(tab){
   const content = document.getElementById("content");
 
   if(tab==="effectif"){
-    content.innerHTML = db.players.map(p=>`
+    content.innerHTML = DATA.players.map(p=>`
       <div class="card">
         <b>${p.prenom} ${p.nom}</b><br>
-        #${p.numero} - ${p.poste}<br>
-        Note: ${p.note}
+        #${p.numero} • ${p.poste}<br>
+        ⭐ ${p.note}/100
       </div>
     `).join("");
   }
 
   if(tab==="matchs"){
-    content.innerHTML = db.matches.map(m=>`
+    content.innerHTML = DATA.matches.map(m=>`
       <div class="card">
-        ${m.date} - ${m.equipe}<br>
-        ${m.adversaire}<br>
-        <b>${m.score}</b>
+        <b>${m.date}</b> • ${m.equipe}<br>
+        vs ${m.adversaire}<br>
+        Score: ${m.score}<br>
+        ⚽ ${m.buteurs.join(", ")}
       </div>
     `).join("");
   }
 
   if(tab==="classements"){
     const scorers = {};
-    db.matches.forEach(m=>{
-      if(m.buteurs){
-        m.buteurs.forEach(b=>{
-          scorers[b]=(scorers[b]||0)+1;
-        });
-      }
+    DATA.matches.forEach(m=>{
+      m.buteurs.forEach(b=>{
+        scorers[b]=(scorers[b]||0)+1;
+      });
     });
 
     const sorted = Object.entries(scorers)
       .sort((a,b)=>b[1]-a[1]);
 
     content.innerHTML = sorted.map(s=>`
-      <div class="card">${s[0]} - ${s[1]} buts</div>
+      <div class="card">⚽ ${s[0]} — ${s[1]} buts</div>
     `).join("");
   }
-
-  if(tab==="mois"){
-    content.innerHTML = "<div class='card'>Équipe du mois bientôt 😉</div>";
-  }
 }
-
-// mode admin
-document.getElementById("adminBtn").onclick=()=>{
-  admin=!admin;
-  alert(admin ? "Mode ADMIN activé" : "Mode ADMIN OFF");
-};
