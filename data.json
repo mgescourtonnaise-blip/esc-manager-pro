@@ -1,5 +1,30 @@
 {
-  "players": [],
-  "matches": [],
+  "players": [
+    {
+      "id": 1,
+      "prenom": "Lucas",
+      "nom": "Martin",
+      "numero": 9,
+      "poste": "BU",
+      "equipes": ["A"],
+      "note": 82,
+      "debut": "2024-08-01",
+      "fin": null
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "date": "2024-09-01",
+      "equipe": "A",
+      "adversaire": "FC Test",
+      "domicile": true,
+      "type": "championnat",
+      "score": "3-1",
+      "buteurs": ["Lucas Martin"],
+      "passeurs": [],
+      "gardien": "Lucas Martin"
+    }
+  ],
   "teamOfMonth": []
 }
