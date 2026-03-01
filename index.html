@@ -1,44 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étoile Sportive Courtonnaise</title>
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESC Manager</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
 <header>
-    <img src="logo.png" alt="ESC Logo" class="logo">
-    <h1>Étoile Sportive Courtonnaise ⚽</h1>
-    <p>L'application officielle du club</p>
+  <h1>⭐ ESC Manager</h1>
 </header>
 
-<main>
-    <section id="admin-section">
-        <button id="login-btn">Connexion Admin</button>
-    </section>
+<nav>
+  <button onclick="showTab('players')">Joueurs</button>
+  <button onclick="showTab('matches')">Matchs</button>
+  <button onclick="showTab('scorers')">Classement</button>
+</nav>
 
-    <section id="players-section">
-        <h2>Joueurs</h2>
-        <div id="players-list"></div>
-    </section>
-
-    <section id="matches-section">
-        <h2>Calendrier des matchs</h2>
-        <div id="matches-list"></div>
-    </section>
-
-    <section id="rankings-section">
-        <h2>Classements</h2>
-        <div id="rankings-list"></div>
-    </section>
-
-    <section id="team-of-month-section">
-        <h2>Équipe du Mois</h2>
-        <div id="team-of-month-list"></div>
-    </section>
-</main>
+<main id="content"></main>
 
 <script src="app.js"></script>
 </body>
