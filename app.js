@@ -1,17 +1,29 @@
-let admin = false;
-let DATA = {};
-
-fetch("data.json")
-  .then(response => response.json())
-  .then(data => {
-    DATA = data;
-    showTab("effectif");
-  });
+// Données intégrées (fiable GitHub Pages)
+const DATA = {
+  players: [
+    {
+      prenom: "Lucas",
+      nom: "Martin",
+      numero: 9,
+      poste: "BU",
+      note: 82
+    }
+  ],
+  matches: [
+    {
+      date: "2024-09-01",
+      equipe: "A",
+      adversaire: "FC Test",
+      score: "3-1",
+      buteurs: ["Lucas Martin"]
+    }
+  ]
+};
 
 function showTab(tab){
   const content = document.getElementById("content");
 
-  if(tab==="effectif"){
+  if(tab==="players"){
     content.innerHTML = DATA.players.map(p=>`
       <div class="card">
         <b>${p.prenom} ${p.nom}</b><br>
@@ -21,10 +33,10 @@ function showTab(tab){
     `).join("");
   }
 
-  if(tab==="matchs"){
+  if(tab==="matches"){
     content.innerHTML = DATA.matches.map(m=>`
       <div class="card">
-        <b>${m.date}</b> • ${m.equipe}<br>
+        <b>${m.date}</b><br>
         vs ${m.adversaire}<br>
         Score: ${m.score}<br>
         ⚽ ${m.buteurs.join(", ")}
@@ -32,7 +44,7 @@ function showTab(tab){
     `).join("");
   }
 
-  if(tab==="classements"){
+  if(tab==="scorers"){
     const scorers = {};
     DATA.matches.forEach(m=>{
       m.buteurs.forEach(b=>{
@@ -48,3 +60,5 @@ function showTab(tab){
     `).join("");
   }
 }
+
+showTab("players");
