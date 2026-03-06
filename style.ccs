@@ -1,43 +1,85 @@
 body{
+
 margin:0;
 font-family:Arial;
 background:#0d1b2a;
 color:white;
+
 }
 
 header{
+
 background:linear-gradient(90deg,#c1121f,#fca311);
 padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 }
 
 nav{
+
 display:flex;
 gap:10px;
-padding:10px;
 justify-content:center;
+padding:10px;
 background:#1b263b;
+
 }
 
 button{
+
 background:#fca311;
 border:none;
 padding:8px 12px;
 border-radius:8px;
 font-weight:bold;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#ffbe33;
+
+}
+
+#content{
+
+padding:10px;
+
 }
 
 .card{
+
 background:#1b263b;
-margin:10px;
+border-radius:12px;
 padding:12px;
-border-radius:10px;
+margin-bottom:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.3);
+
 }
 
-.card img{
-width:70px;
+.playerCard{
+
+display:flex;
+gap:10px;
+align-items:center;
+
+}
+
+.playerCard img{
+
+width:60px;
+height:60px;
 border-radius:50%;
-margin-bottom:5px;
+object-fit:cover;
+
+}
+
+.stats{
+
+font-size:14px;
+color:#ddd;
+
 }
