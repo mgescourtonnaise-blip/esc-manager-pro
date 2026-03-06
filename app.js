@@ -1,86 +1,111 @@
-let ADMIN = false;
+let ADMIN=false;
 
-let DATA = JSON.parse(localStorage.getItem("esc_data")) || {
-players: [],
-matches: []
+let DATA=JSON.parse(localStorage.getItem("esc_data"))||{
+players:[],
+matches:[]
 };
 
 function save(){
+
 localStorage.setItem("esc_data",JSON.stringify(DATA));
+
 }
 
 function loginAdmin(){
 
-let pass = prompt("Mot de passe admin");
+let pass=prompt("Mot de passe admin");
 
 if(pass==="esc2024"){
+
 ADMIN=true;
 alert("Mode admin activé");
-showTab("players");
+
 }else{
+
 alert("Mot de passe incorrect");
+
 }
 
 }
 
 function showTab(tab){
 
-const content = document.getElementById("content");
+let content=document.getElementById("content");
 
 if(tab==="players"){
 
-content.innerHTML = `
-${ADMIN ? `<button onclick="addPlayer()">➕ Ajouter joueur</button>` : ""}
+content.innerHTML=`
+
+${ADMIN?`<button onclick="addPlayer()">Ajouter joueur</button>`:""}
 
 ${DATA.players.map((p,i)=>`
 
-<div class="card">
+<div class="card playerCard">
 
-${p.photo ? `<img src="${p.photo}">` : ""}
+${p.photo?`<img src="${p.photo}">`:""}
+
+<div>
 
 <b>${p.prenom} ${p.nom}</b><br>
-#${p.numero} • ${p.poste}<br>
-Equipe : ${p.team}<br>
-Note : ${p.note}<br>
-Début : ${p.start}<br>
-Fin : ${p.end ? p.end : "Actif"}
 
-${ADMIN ? `
-<br><br>
+<span class="stats">
+
+#${p.numero} • ${p.poste}<br>
+Equipe ${p.team}<br>
+Note ${p.note}
+
+</span>
+
+${ADMIN?`
+
+<br>
+
 <button onclick="editPlayer(${i})">Modifier</button>
 <button onclick="deletePlayer(${i})">Supprimer</button>
-` : ""}
+
+`:""}
+
+</div>
 
 </div>
 
 `).join("")}
+
 `;
 
 }
 
 if(tab==="matches"){
 
-content.innerHTML = `
-${ADMIN ? `<button onclick="addMatch()">➕ Ajouter match</button>` : ""}
+content.innerHTML=`
+
+${ADMIN?`<button onclick="addMatch()">Ajouter match</button>`:""}
 
 ${DATA.matches.map((m,i)=>`
 
 <div class="card">
 
 <b>${m.date}</b><br>
+
 vs ${m.adversaire}<br>
+
 Score ${m.score}<br>
+
 ⚽ ${m.buteurs}
 
-${ADMIN ? `
-<br><br>
+${ADMIN?`
+
+<br>
+
 <button onclick="editMatch(${i})">Modifier</button>
 <button onclick="deleteMatch(${i})">Supprimer</button>
-` : ""}
+
+`:""}
 
 </div>
 
 `).join("")}
+
 `;
 
 }
@@ -94,7 +119,8 @@ DATA.matches.forEach(m=>{
 m.buteurs.split(",").forEach(b=>{
 
 b=b.trim();
-if(!b) return;
+
+if(!b)return;
 
 scorers[b]=(scorers[b]||0)+1;
 
@@ -109,9 +135,13 @@ content.innerHTML="<h2>Classement Buteurs</h2>";
 sorted.forEach(s=>{
 
 content.innerHTML+=`
+
 <div class="card">
+
 ⚽ ${s[0]} — ${s[1]} buts
+
 </div>
+
 `;
 
 });
@@ -122,17 +152,17 @@ content.innerHTML+=`
 
 function addPlayer(){
 
-let prenom = prompt("Prénom");
-let nom = prompt("Nom");
-let numero = prompt("Numéro");
-let poste = prompt("Poste");
-let team = prompt("Equipe (A ou B)");
-let note = prompt("Note générale /100");
-let start = prompt("Date début au club (ex: 2024)");
-let end = prompt("Date fin au club (laisser vide si actif)");
+let prenom=prompt("Prenom");
+let nom=prompt("Nom");
+let numero=prompt("Numero");
+let poste=prompt("Poste");
+let team=prompt("Equipe A ou B");
+let note=prompt("Note /100");
 
 let input=document.createElement("input");
+
 input.type="file";
+
 input.accept="image/*";
 
 input.onchange=function(){
@@ -142,25 +172,26 @@ let reader=new FileReader();
 reader.onload=function(e){
 
 DATA.players.push({
+
 prenom,
 nom,
 numero,
 poste,
 team,
 note,
-start,
-end,
 photo:e.target.result
+
 });
 
 save();
+
 showTab("players");
 
-}
+};
 
 reader.readAsDataURL(input.files[0]);
 
-}
+};
 
 input.click();
 
@@ -170,16 +201,15 @@ function editPlayer(i){
 
 let p=DATA.players[i];
 
-p.prenom=prompt("Prénom",p.prenom);
+p.prenom=prompt("Prenom",p.prenom);
 p.nom=prompt("Nom",p.nom);
-p.numero=prompt("Numéro",p.numero);
+p.numero=prompt("Numero",p.numero);
 p.poste=prompt("Poste",p.poste);
 p.team=prompt("Equipe",p.team);
 p.note=prompt("Note",p.note);
-p.start=prompt("Début club",p.start);
-p.end=prompt("Fin club",p.end);
 
 save();
+
 showTab("players");
 
 }
@@ -189,7 +219,9 @@ function deletePlayer(i){
 if(confirm("Supprimer joueur ?")){
 
 DATA.players.splice(i,1);
+
 save();
+
 showTab("players");
 
 }
@@ -204,13 +236,16 @@ let score=prompt("Score");
 let buteurs=prompt("Buteurs (séparés par virgule)");
 
 DATA.matches.push({
+
 date,
 adversaire,
 score,
 buteurs
+
 });
 
 save();
+
 showTab("matches");
 
 }
@@ -225,6 +260,7 @@ m.score=prompt("Score",m.score);
 m.buteurs=prompt("Buteurs",m.buteurs);
 
 save();
+
 showTab("matches");
 
 }
@@ -234,7 +270,9 @@ function deleteMatch(i){
 if(confirm("Supprimer match ?")){
 
 DATA.matches.splice(i,1);
+
 save();
+
 showTab("matches");
 
 }
