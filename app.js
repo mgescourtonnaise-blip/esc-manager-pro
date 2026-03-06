@@ -40,8 +40,10 @@ ${p.photo ? `<img src="${p.photo}">` : ""}
 
 <b>${p.prenom} ${p.nom}</b><br>
 #${p.numero} • ${p.poste}<br>
-Equipe ${p.team}<br>
-⭐ ${p.note}
+Equipe : ${p.team}<br>
+Note : ${p.note}<br>
+Début : ${p.start}<br>
+Fin : ${p.end ? p.end : "Actif"}
 
 ${ADMIN ? `
 <br><br>
@@ -102,11 +104,11 @@ scorers[b]=(scorers[b]||0)+1;
 
 let sorted=Object.entries(scorers).sort((a,b)=>b[1]-a[1]);
 
-content.innerHTML = "<h2>Classement Buteurs</h2>";
+content.innerHTML="<h2>Classement Buteurs</h2>";
 
 sorted.forEach(s=>{
 
-content.innerHTML += `
+content.innerHTML+=`
 <div class="card">
 ⚽ ${s[0]} — ${s[1]} buts
 </div>
@@ -125,15 +127,17 @@ let nom = prompt("Nom");
 let numero = prompt("Numéro");
 let poste = prompt("Poste");
 let team = prompt("Equipe (A ou B)");
-let note = prompt("Note");
+let note = prompt("Note générale /100");
+let start = prompt("Date début au club (ex: 2024)");
+let end = prompt("Date fin au club (laisser vide si actif)");
 
-let input = document.createElement("input");
+let input=document.createElement("input");
 input.type="file";
 input.accept="image/*";
 
 input.onchange=function(){
 
-let reader = new FileReader();
+let reader=new FileReader();
 
 reader.onload=function(e){
 
@@ -144,6 +148,8 @@ numero,
 poste,
 team,
 note,
+start,
+end,
 photo:e.target.result
 });
 
@@ -162,14 +168,16 @@ input.click();
 
 function editPlayer(i){
 
-let p = DATA.players[i];
+let p=DATA.players[i];
 
-p.prenom = prompt("Prénom",p.prenom);
-p.nom = prompt("Nom",p.nom);
-p.numero = prompt("Numéro",p.numero);
-p.poste = prompt("Poste",p.poste);
-p.team = prompt("Equipe",p.team);
-p.note = prompt("Note",p.note);
+p.prenom=prompt("Prénom",p.prenom);
+p.nom=prompt("Nom",p.nom);
+p.numero=prompt("Numéro",p.numero);
+p.poste=prompt("Poste",p.poste);
+p.team=prompt("Equipe",p.team);
+p.note=prompt("Note",p.note);
+p.start=prompt("Début club",p.start);
+p.end=prompt("Fin club",p.end);
 
 save();
 showTab("players");
@@ -190,10 +198,10 @@ showTab("players");
 
 function addMatch(){
 
-let date = prompt("Date");
-let adversaire = prompt("Adversaire");
-let score = prompt("Score");
-let buteurs = prompt("Buteurs (séparés par virgule)");
+let date=prompt("Date");
+let adversaire=prompt("Adversaire");
+let score=prompt("Score");
+let buteurs=prompt("Buteurs (séparés par virgule)");
 
 DATA.matches.push({
 date,
@@ -209,12 +217,12 @@ showTab("matches");
 
 function editMatch(i){
 
-let m = DATA.matches[i];
+let m=DATA.matches[i];
 
-m.date = prompt("Date",m.date);
-m.adversaire = prompt("Adversaire",m.adversaire);
-m.score = prompt("Score",m.score);
-m.buteurs = prompt("Buteurs",m.buteurs);
+m.date=prompt("Date",m.date);
+m.adversaire=prompt("Adversaire",m.adversaire);
+m.score=prompt("Score",m.score);
+m.buteurs=prompt("Buteurs",m.buteurs);
 
 save();
 showTab("matches");
