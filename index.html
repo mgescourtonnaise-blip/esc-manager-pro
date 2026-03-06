@@ -5,24 +5,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ESC Manager</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
 
 <header>
+
 <h1>⭐ ESC Manager</h1>
-<button onclick="loginAdmin()">Mode Admin</button>
+
+<div>
+<button onclick="loginAdmin()">Admin</button>
+<input type="file" id="excelFile" accept=".xlsx" onchange="importExcel(event)">
+</div>
+
 </header>
 
 <nav>
+
 <button onclick="showTab('players')">Joueurs</button>
 <button onclick="showTab('matches')">Matchs</button>
-<button onclick="showTab('scorers')">Classement</button>
+<button onclick="showTab('scorers')">Buteurs</button>
+
 </nav>
 
 <main id="content"></main>
 
+<script src="excel.js"></script>
 <script src="app.js"></script>
 
 </body>
