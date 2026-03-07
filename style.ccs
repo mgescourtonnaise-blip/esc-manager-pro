@@ -2,28 +2,29 @@ body{
 
 margin:0;
 font-family:Arial;
-background:#0d1b2a;
+background:#0f172a;
 color:white;
 
 }
 
 header{
 
-background:linear-gradient(90deg,#c1121f,#fca311);
-padding:15px;
+background:linear-gradient(90deg,#d90429,#fca311);
+padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
 
 }
 
 nav{
 
 display:flex;
-gap:10px;
 justify-content:center;
-padding:10px;
-background:#1b263b;
+gap:12px;
+padding:12px;
+background:#1e293b;
 
 }
 
@@ -31,40 +32,51 @@ button{
 
 background:#fca311;
 border:none;
-padding:8px 12px;
+padding:8px 14px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+transition:0.2s;
 
 }
 
 button:hover{
 
+transform:scale(1.05);
 background:#ffbe33;
 
 }
 
 #content{
 
-padding:10px;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:15px;
 
 }
 
 .card{
 
-background:#1b263b;
-border-radius:12px;
-padding:12px;
-margin-bottom:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.3);
+background:#1e293b;
+border-radius:14px;
+padding:15px;
+box-shadow:0 6px 12px rgba(0,0,0,0.3);
+transition:0.2s;
+
+}
+
+.card:hover{
+
+transform:translateY(-4px);
 
 }
 
 .playerCard{
 
 display:flex;
-gap:10px;
 align-items:center;
+gap:12px;
 
 }
 
@@ -74,12 +86,27 @@ width:60px;
 height:60px;
 border-radius:50%;
 object-fit:cover;
+border:3px solid #fca311;
 
 }
 
-.stats{
+.playerInfo{
+
+display:flex;
+flex-direction:column;
+
+}
+
+.playerName{
+
+font-size:18px;
+font-weight:bold;
+
+}
+
+.playerStats{
 
 font-size:14px;
-color:#ddd;
+opacity:0.8;
 
 }
