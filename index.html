@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ESC Manager</title>
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Librairie pour lire Excel -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 </head>
 
 <body>
 
-<header>
-<h1>⭐ ESC Manager</h1>
+<header class="header">
+
+<div class="logoBox">
+
+<img src="logo.png" class="logo">
+
+<h1>ESC Manager</h1>
+
+</div>
+
+<div class="adminBox">
+
 <button onclick="loginAdmin()">Admin</button>
-<input type="file" id="excelFile" accept=".xlsx,.xls" onchange="importExcel(event)">
+
+<input type="file" accept=".xlsx" onchange="importExcel(event)">
+
+</div>
+
 </header>
 
-<nav>
+<nav class="nav">
+
 <button onclick="showTab('players')">Joueurs</button>
+
 <button onclick="showTab('matches')">Matchs</button>
+
 <button onclick="showTab('scorers')">Buteurs</button>
+
 </nav>
 
 <main id="content"></main>
@@ -32,4 +52,5 @@
 <script src="app.js"></script>
 
 </body>
+
 </html>
