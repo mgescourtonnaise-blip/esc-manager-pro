@@ -1,29 +1,29 @@
 function importExcel(event){
 
-let file=event.target.files[0];
+let file = event.target.files[0];
 
-let reader=new FileReader();
+let reader = new FileReader();
 
-reader.onload=function(e){
+reader.onload = function(e){
 
-let data=new Uint8Array(e.target.result);
+let data = new Uint8Array(e.target.result);
 
-let workbook=XLSX.read(data,{type:"array"});
+let workbook = XLSX.read(data,{type:"array"});
 
-let playersSheet=workbook.Sheets["joueurs"];
+let sheet = workbook.Sheets["Joueurs"];
 
-let players=XLSX.utils.sheet_to_json(playersSheet);
+let rows = XLSX.utils.sheet_to_json(sheet);
 
-players.forEach(p=>{
+rows.forEach(r=>{
 
 DATA.players.push({
 
-prenom:p.prenom,
-nom:p.nom,
-numero:p.numero,
-poste:p.poste,
-team:p.equipe,
-note:p.note
+prenom: r["PRÉNOM"],
+nom: r["NOM"],
+poste: r["POSTE"],
+numero: r["NUMERO"],
+team: r["EQUIPES"],
+note: r["NOTE"]
 
 });
 
@@ -31,7 +31,7 @@ note:p.note
 
 save();
 
-alert("Import joueurs terminé");
+alert("Import des joueurs réussi");
 
 showTab("players");
 
